@@ -1,0 +1,13 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title $63k
+    style.
+      form {
+      text-align:center;
+      }
+  body
+    form(action='/upload', enctype='multipart/form-data', method='post')
+      input(accept='application/pdf', name='file', onchange='form.submit()', type='file')
+

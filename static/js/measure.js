@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
   var tool;
   var tool_default = 'line';
 
-  function init () {
+  function initMeasure() {
     // Find the canvas element.
     canvaso = document.getElementById('canvas');
     if (!canvaso) {
@@ -39,9 +39,9 @@ window.addEventListener('load', function () {
       return;
     }
 
-    canvas.id     = 'imageTemp';
-    canvas.width  = canvaso.width;
-    canvas.height = canvaso.height;
+    canvas.id     = 'canvasTemp';
+//    canvas.width  = canvaso.width;
+//    canvas.height = canvaso.height;
     container.appendChild(canvas);
 
     context = canvas.getContext('2d');
@@ -91,8 +91,8 @@ window.addEventListener('load', function () {
     }
   }
 
-  // This function draws the #imageTemp canvas on top of #canvas, after which 
-  // #imageTemp is cleared. This function is called each time when the user 
+  // This function draws the #canvasTemp canvas on top of #canvas, after which 
+  // #canvasTemp is cleared. This function is called each time when the user 
   // completes a drawing operation.
   function img_update () {
 		contexto.drawImage(canvas, 0, 0);
@@ -208,6 +208,6 @@ window.addEventListener('load', function () {
     };
   };
 
-  init();
+  initMeasure();
 
 }, false); }

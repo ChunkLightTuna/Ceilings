@@ -32,19 +32,13 @@ var options = {
 };
 */
 
-/*
-var process_pdf = function(pdf, callback) {
-  exec('convert.sh' + pdf);
-}
-*/
-
-
-
-
 var app = express();
 
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jade');
+
 app.get('/',function(req,res) {
-  res.sendFile('/static/upload.html', { root: __dirname })
+  res.render('upload', {title: 'upload'});
 });
 
 app.post('/upload', upload.single('file'), function(req,res,next) {
@@ -62,7 +56,7 @@ app.post('/upload', upload.single('file'), function(req,res,next) {
     console.log('child process exited with code ' + code);
   });
 
-  res.send('upload successful');
+  res.render('edit', {title: 'edit'});
 });
 
 app.use(express.static('static'));

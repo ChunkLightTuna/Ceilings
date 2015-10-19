@@ -1,31 +1,37 @@
 if(window.addEventListener) {
-  window.addEventListener('load', function () {
+window.addEventListener('load', function () {
 
-    var rotate, scale, plans, translateX, translateY
+    var plans, inputRotate, inputScale, inputTranslateX, inputTranslateY, inputReset
 
     function initControl() {
-      rotate = document.getElementById('rotate')
-      scale = document.getElementById('scale')
-      plans = document.getElementById('plans')
-      translateX = document.getElementById('translateX')
-      translateY = document.getElementById('translateY')
+      plans = document.getElementById("plans")
+      inputRotate = document.getElementById("rotate")
+      inputScale = document.getElementById("scale")
+      inputTranslateX = document.getElementById("translateX")
+      inputTranslateY = document.getElementById("translateY")
+      inputReset = document.getElementById("reset")
+
+      inputRotate.addEventListener("input", updatePlans)
+      inputScale.addEventListener("input", updatePlans)
+      inputTranslateX.addEventListener("input", updatePlans)
+      inputTranslateY.addEventListener("input", updatePlans)
+      inputReset.addEventListener("click", reset)
     }
 
     function updatePlans() {
       plans.style.transform =
-        'rotate(' + rotate.value + 'deg)' +
-        'scale(' + scale.value + ')' +
-        'translate(' + translateX.value + '%, '+ translateY.value + '%)'
+        "rotate(" + inputRotate.value + "deg)" +
+        "scale(" + inputScale.value + ")" +
+        "translate(" + inputTranslateX.value + "%, "+ inputTranslateY.value + "%)";
     }
 
     function reset() {
-      rotate.value = 0
-      scale.value = 1
-      translateX.value = 0
-      translateY.value = 0
+      inputRotate.value = 0
+      inputScale.value = 1
+      inputTranslateX.value = 0
+      inputTranslateY.value = 0
+      updatePlans()
     }
-
-  }
-  initControl();
-
+  
+  initControl()
 }, false); }
