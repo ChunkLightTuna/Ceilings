@@ -16,6 +16,9 @@ var upload = multer({
 
 });
 
+//for our conversions
+var spawn = require('child_process').spawn;
+
 /*
 //ssl
 var https = require('https');
@@ -41,11 +44,23 @@ var process_pdf = function(pdf, callback) {
 var app = express();
 
 app.get('/',function(req,res) {
-  res.sendFile('/static/upload.html', { root: __dirname });
+  res.sendFile('/static/upload.html', { root: __dirname })
 });
 
 app.post('/upload', upload.single('file'), function(req,res,next) {
+  script = spawn('./convert.sh', [req.file.filename])
 
+  script.stdout.on('data', function (data) {    // register one or more handlers
+    console.log('stdout: ' + data);
+  });
+
+  script.stderr.on('data', function (data) {
+    console.log('stderr: ' + data);
+  });
+
+  script.on('exit', function (code) {
+    console.log('child process exited with code ' + code);
+  });
 
   res.send('upload successful');
 });

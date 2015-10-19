@@ -9,14 +9,13 @@
 <body>
   <div id="controls">
 
-    <input type="range" class="slider" min="-30" max="30" step="0.1" value="0" id="rotate">
-    <input type="range" class="slider" min="0.7" max="2.4" step="0.05" value="1" id="scale"><br>
-    <input type="range" class="slider" min="-15" max="15" step="0.1" value="0" id="translateX">
-    <input type="range" class="slider" min="-15" max="15" step="0.1" value="0" id="translateY">
+    <input type="range" id="rotate" class="slider" min="-30" max="30" step="0.1" value="0">
+    <input type="range" id="scale" class="slider" min="0.7" max="2.4" step="0.05" value="1"><br>
+    <input type="range" id="translateX" class="slider" min="-15" max="15" step="0.1" value="0">
+    <input type="range" id="translateY" class="slider" min="-15" max="15" step="0.1" value="0">
 
     <br>
-    <input type="button" value="reset" id="reset"> 
-    <input type="submit" onclick="updatePlans(); return false">
+    <input type="button" id="reset" value="reset">
 <!--    <label>Drawing tool: <select id="dtool">
         <option value="line">Line</option>
         <option value="rect">Rectangle</option>
@@ -36,33 +35,34 @@
 
 //    function init() {
     var plans = document.getElementById("plans"),
-        r = document.getElementById("rotate"),
-        s = document.getElementById("scale"),
-        x = document.getElementById("translateX"),
-        y = document.getElementById("translateY")
+        inputRotate = document.getElementById("rotate"),
+        inputScale = document.getElementById("scale"),
+        inputTranslateX = document.getElementById("translateX"),
+        inputTranslateY = document.getElementById("translateY"),
+        inputReset = document.getElementById("reset")
 //    }
 
     function updatePlans() {
-     plans.style.transform = 
-        "rotate(" + r.value + "deg)" + 
-        "scale(" + s.value + ")" + 
-        "translate(" + x.value + "%, "+ y.value + "%)"
+      plans.style.transform = 
+        "rotate(" + inputRotate.value + "deg)" + 
+        "scale(" + inputScale.value + ")" + 
+        "translate(" + inputTranslateX.value + "%, "+ inputTranslateY.value + "%)";
     }
 
     function reset() {
-      r.value = 0;
-      s.value = 1;
-      x.value = 0;
-      y.value = 0;
-      updatePlans;
+      inputRotate.value = 0
+      inputScale.value = 1
+      inputTranslateX.value = 0
+      inputTranslateY.value = 0
+      updatePlans()
     }
 
 
-    rotate.addEventListener("input", updatePlans, false)
-    scale.addEventListener("input", updatePlans, false)
-    translateX.addEventListener("input", updatePlans, false)
-    translateY.addEventListener("input", updatePlans, false)
-    document.getElementById("reset").addEventListener("input", reset, false)
+    inputRotate.addEventListener("input", updatePlans)
+    inputScale.addEventListener("input", updatePlans)
+    inputTranslateX.addEventListener("input", updatePlans)
+    inputTranslateY.addEventListener("input", updatePlans)
+    inputReset.addEventListener("click", reset)
 
 
 //    init();

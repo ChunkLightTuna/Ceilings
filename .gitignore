@@ -1,4 +1,6 @@
 /keys/*
+*.pem
+*.key
 *.swp
 *.png
 *.pdf

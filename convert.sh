@@ -1,12 +1,21 @@
 #!/bin/bash
-args = ("$@")
-
-NAME = ${args[0]}
+args=("$@")
+name=${args[0]}
 
 cd ./pdf
-pdftoppm -gray -png $NAME $NAME
 
-pngquant -s10 -- $NAME-*.png
-mv $NAME-*-fs8.png static/img/processed/
+echo "converting pdf to png"
+pdftoppm -gray -png $name $name
 
-rm $NAME*
+echo "compressing pngs"
+pngquant -s10 -- $name-*.png
+
+echo "moving pngs to static/img/processed"
+for png in $name-*-fs8.png; do
+  mv $png ../static/img/processed/
+done
+
+echo "cleanup"
+for match in $name*; do
+  rm $match
+done
