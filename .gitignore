@@ -1,5 +1,6 @@
 *.pem
 *.key
+*.pfx
 *.swp
 *.png
 *.pdf
