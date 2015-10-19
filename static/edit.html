@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>$63k</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+  <div id="controls">
+
+    <input type="range" class="slider" min="-30" max="30" step="0.1" value="0" id="rotate">
+    <input type="range" class="slider" min="0.7" max="2.4" step="0.05" value="1" id="scale"><br>
+    <input type="range" class="slider" min="-15" max="15" step="0.1" value="0" id="translateX">
+    <input type="range" class="slider" min="-15" max="15" step="0.1" value="0" id="translateY">
+
+    <br>
+    <input type="button" value="reset" id="reset"> 
+    <input type="submit" onclick="updatePlans(); return false">
+<!--    <label>Drawing tool: <select id="dtool">
+        <option value="line">Line</option>
+        <option value="rect">Rectangle</option>
+        <option value="pencil">Pencil</option>
+    </select></label>
+-->
+  </div>
+
+  <div id="container">
+    <div id="plans"></div>
+    <canvas id="canvas"></canvas>
+  </div>
+<!--  <script src="/js/measure.js"></script>-->
+  <script>
+
+//    var rotate, scale, plans, translateX, translateY
+
+//    function init() {
+    var plans = document.getElementById("plans"),
+        r = document.getElementById("rotate"),
+        s = document.getElementById("scale"),
+        x = document.getElementById("translateX"),
+        y = document.getElementById("translateY")
+//    }
+
+    function updatePlans() {
+     plans.style.transform = 
+        "rotate(" + r.value + "deg)" + 
+        "scale(" + s.value + ")" + 
+        "translate(" + x.value + "%, "+ y.value + "%)"
+    }
+
+    function reset() {
+      r.value = 0;
+      s.value = 1;
+      x.value = 0;
+      y.value = 0;
+      updatePlans;
+    }
+
+
+    rotate.addEventListener("input", updatePlans, false)
+    scale.addEventListener("input", updatePlans, false)
+    translateX.addEventListener("input", updatePlans, false)
+    translateY.addEventListener("input", updatePlans, false)
+    document.getElementById("reset").addEventListener("input", reset, false)
+
+
+//    init();
+  </script>
+</body>
+</html>
